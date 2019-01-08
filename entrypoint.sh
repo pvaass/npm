@@ -20,6 +20,9 @@ if [ -n "$PRIVATE_KEY" ]; then
 
   cat ~/.ssh/id_rsa
 	chmod 400 ~/.ssh/id_rsa
+
+  eval $(ssh-agent)
+  ssh-add ~/.ssh/id_rsa
 fi
 cd /github/workspace
 sh -c "npm $*"
