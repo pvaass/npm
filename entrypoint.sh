@@ -12,17 +12,6 @@ if [ -n "$NPM_AUTH_TOKEN" ]; then
   chmod 0600 "$NPM_CONFIG_USERCONFIG"
 fi
 
-if [ -n "$PRIVATE_KEY" ]; then
-	echo "YES"
-	mkdir ~/.ssh
-	ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-	(echo "$PRIVATE_KEY" | base64 --decode) >> ~/.ssh/id_rsa
-
-  cat ~/.ssh/id_rsa
-	chmod 400 ~/.ssh/id_rsa
-
-  eval $(ssh-agent)
-  ssh-add ~/.ssh/id_rsa
-fi
+git-ssh-key setup
 cd /github/workspace
 sh -c "npm $*"
