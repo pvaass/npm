@@ -13,6 +13,7 @@ if [ -n "$NPM_AUTH_TOKEN" ]; then
 fi
 
 if [ -n "$PRIVATE_KEY" ]; then
+	echo "YES"
 	mkdir ~/.ssh
 	ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 	(echo "$PRIVATE_KEY" | base64 --decode) >> ~/.ssh/id_rsa
