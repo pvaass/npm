@@ -11,8 +11,6 @@ LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="red"
 COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
 
-RUN npm install -g git-ssh-key
-
 COPY "entrypoint.sh" "/entrypoint.sh"
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["help"]

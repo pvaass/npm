@@ -12,6 +12,7 @@ if [ -n "$NPM_AUTH_TOKEN" ]; then
   chmod 0600 "$NPM_CONFIG_USERCONFIG"
 fi
 
-git-ssh-key setup
+git config --global url."https://${GIT_HUB_TOKEN_GLOBAL}@github.com".insteadOf ssh://git@github.com
+
 cd /github/workspace
 sh -c "npm $*"
