@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -12,4 +12,11 @@ if [ -n "$NPM_AUTH_TOKEN" ]; then
   chmod 0600 "$NPM_CONFIG_USERCONFIG"
 fi
 
+if [ -n "$PRIVATE_KEY" ]; then
+	mkdir ~/.ssh
+	ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+	(echo "$PRIVATE_KEY" | base64 --decode) >> ~/.ssh/id_rsa
+	chmod 400 ~/.ssh/id_rsa
+fi
+cd /github/workspace
 sh -c "npm $*"
